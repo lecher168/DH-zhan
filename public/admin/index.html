@@ -11,12 +11,38 @@
   <link rel="stylesheet" href="/css/admin-card-options.css?v=55b9995c" />
   <link rel="stylesheet" href="/css/admin-preview-shell.css?v=82413550" />
   <link rel="stylesheet" href="/css/admin-preview-controls.css?v=7fa6812c" />
-  <link rel="stylesheet" href="/css/admin-preview-cards.css?v=202608011500" />
+  <link rel="stylesheet" href="/css/admin-preview-cards.css?v=20260801" />
   <link rel="stylesheet" href="/css/admin-settings-modal.css?v=5fe5060a" />
   <link rel="stylesheet" href="/css/admin-card-preview.css?v=a42c3dea" />
   <link rel="stylesheet" href="/css/admin-feedback.css?v=15b4dada" />
   <link rel="stylesheet" href="/css/admin-dropdown.css?v=9efddb85" />
   <link rel="stylesheet" href="/css/tailwind.min.css?v=79714d4b">
+
+  <!-- ===== 强制页脚白色 - 覆盖所有外部CSS ===== -->
+  <style>
+    .live-preview-footer,
+    .live-preview-footer *,
+    [data-preview-role="footer"],
+    [data-preview-role="footer"] *,
+    .home-live-preview .live-preview-footer,
+    .home-live-preview .live-preview-footer *,
+    .home-live-preview.has-wallpaper .live-preview-footer,
+    .home-live-preview.has-wallpaper .live-preview-footer * {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+    }
+
+    .live-preview-footer-separator {
+      color: rgba(255, 255, 255, 0.35) !important;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0.35) !important;
+    }
+
+    .live-preview-footer-link,
+    .live-preview-footer-link * {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -511,8 +537,8 @@
 
                 <section class="live-card-grid" data-preview-role="cardGrid"></section>
 
-                <!-- 页脚 - 已修复为白色文字 -->
-                <footer class="live-preview-footer" data-preview-role="footer" style="color: #ffffff !important;">
+                <!-- 页脚 -->
+                <footer class="live-preview-footer" data-preview-role="footer">
                   <div class="live-preview-footer-inner">
                     <span class="live-preview-footer-link">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -526,8 +552,8 @@
                       <span>Github</span>
                     </span>
                     <span class="live-preview-footer-separator">|</span>
-                    <p style="display: inline; margin: 0;">
-                      © <span data-preview-role="footerYear">2026</span> <span data-preview-role="footerText">曾梦想仗剑走天涯</span>
+                    <p>
+                      © <span data-preview-role="footerYear">2026</span> <span data-preview-role="footerText">让自己变得更优秀</span>
                     </p>
                   </div>
                 </footer>
