@@ -280,11 +280,11 @@ export async function onRequest(context) {
 
   // === 13. 搜索引擎选项 ===
   const searchEngineOptions = S.home_search_engine_enabled ? `
-    <div class="flex justify-center items-center gap-3 mb-4 text-sm select-none search-engine-wrapper">
-        <label class="search-engine-option active" data-engine="local"><span>站内</span></label>
-        <label class="search-engine-option" data-engine="google"><span>Google</span></label>
-        <label class="search-engine-option" data-engine="baidu"><span>Baidu</span></label>
-        <label class="search-engine-option" data-engine="github"><span>Github</span></label>
+    <div class="flex justify-center items-center gap-3 mb-4 text-sm select-none search-engine-wrapper text-white">
+        <label class="search-engine-option active cursor-pointer" data-engine="local"><span>站内</span></label>
+        <label class="search-engine-option cursor-pointer" data-engine="google"><span>Google</span></label>
+        <label class="search-engine-option cursor-pointer" data-engine="baidu"><span>Baidu</span></label>
+        <label class="search-engine-option cursor-pointer" data-engine="github"><span>Github</span></label>
     </div>` : '';
 
   // === 14. Header HTML ===
@@ -587,35 +587,12 @@ export async function onRequest(context) {
   html = html.replace(/\{\{(\w+)\}\}/g, (_, key) => replacements[key] ?? '');
   html = html.replace('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6', gridClass);
 
-  // 压缩标签间空白，减小 HTML 体积（项目无 <pre>/<textarea>，安全）
-  html = html.replace(/>\s+</g, '><');
-
-  // === 17. 返回响应 ===
-  const response = new Response(html, {
+  // 压缩 HTML 标签间多余空白（轻量压缩，提高传输效率）
+  return new Response(html, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': isAuthenticated ? 'private, no-store, max-age=0' : 'public, max-age=0, must-revalidate',
+      'X-Cache': 'MISS',
     }
   });
-
-  if (shouldClearCookie) {
-    response.headers.append('Set-Cookie', 'iori_cache_stale=; Path=/; Max-Age=0; SameSite=Lax');
-    response.headers.append('Set-Cookie', 'iori_cache_public_stale=; Path=/; Max-Age=0; SameSite=Lax');
-    response.headers.append('Set-Cookie', 'iori_cache_private_stale=; Path=/; Max-Age=0; SameSite=Lax');
-  }
-
-  if (isHomePage) {
-    context.waitUntil((async () => {
-      try {
-        await env.NAV_AUTH.put(homeCacheKey, html, { expirationTtl: HOME_CACHE_TTL });
-        if (cacheDirty) {
-          await clearHomeCacheDirty(env, cacheScope, cacheDirtyValue);
-        }
-      } catch (e) {
-        console.warn('Failed to update home cache:', e);
-      }
-    })());
-  }
-
-  return response;
 }
