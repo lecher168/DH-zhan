@@ -525,14 +525,19 @@
                       <span>Github</span>
                     </span>
                     <span class="live-preview-footer-separator">|</span>
-                    <!-- 终极强制白色标签：包含全套 CSS 属性与 WebKit 专有覆盖 -->
-                    <p style="
-                      color: #ffffff !important; 
-                      -webkit-text-fill-color: #ffffff !important; 
-                      color-scheme: light dark !important; 
-                      opacity: 0.95; 
-                      mix-blend-mode: normal !important;
-                    ">
+
+                    <!-- 最高级别的强制样式覆盖层 -->
+                    <style>
+                      [data-preview-role="footer"] p,
+                      [data-preview-role="footer"] p *,
+                      [data-preview-role="footer"] span {
+                        color: #ffffff !important;
+                        -webkit-text-fill-color: #ffffff !important;
+                        opacity: 0.95 !important;
+                      }
+                    </style>
+
+                    <p>
                       © <span data-preview-role="footerYear">2026</span> <span data-preview-role="footerText">曾梦想仗剑走天涯</span>
                     </p>
                   </div>
