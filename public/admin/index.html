@@ -525,8 +525,14 @@
                       <span>Github</span>
                     </span>
                     <span class="live-preview-footer-separator">|</span>
-                    <!-- 使用强制内联样式，确保 PC 端与移动端无视 CSS 覆盖，始终保持白色文字 -->
-                    <p style="color: #ffffff !important; opacity: 0.9;">
+                    <!-- 终极强制白色标签：包含全套 CSS 属性与 WebKit 专有覆盖 -->
+                    <p style="
+                      color: #ffffff !important; 
+                      -webkit-text-fill-color: #ffffff !important; 
+                      color-scheme: light dark !important; 
+                      opacity: 0.95; 
+                      mix-blend-mode: normal !important;
+                    ">
                       © <span data-preview-role="footerYear">2026</span> <span data-preview-role="footerText">曾梦想仗剑走天涯</span>
                     </p>
                   </div>
