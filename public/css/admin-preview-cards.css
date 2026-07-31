@@ -24,7 +24,7 @@
   border-top: 1px solid rgba(219, 234, 254, 0.7);
   background: rgba(255, 255, 255, 0.8);
   /* 风格一/二：黑色页脚文字 */
-  color: #111827;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -32,7 +32,7 @@
   border: 0;
   background: transparent;
   /* 有壁纸时风格一/二仍用黑色，保证浅色壁纸可读 */
-  color: #111827;
+  color: #ffffff;
 }
 
 .live-preview-footer-inner {
